@@ -9,45 +9,45 @@ typedef struct {
     int top;
 } stack;
 
-void stack_init(stack *sp)
+void stack_init(stack *sp) // initialize a stack
 {
     sp->top = -1;
 }
 
-int is_empty(stack *sp)
+int is_empty(stack *sp) // check if a stack is empty
 {
     if(sp->top == -1)
         return 1;
     return 0;
 }
 
-int size(stack *sp)
+int size(stack *sp) // return the number of a stack's size
 {
     return sp->top + 1;
 }
 
-int is_full(stack *sp)
+int is_full(stack *sp) // check if a stack is full
 {
     if(sp->top +1 >= MAX_SIZE)
         return 1;
     return 0;
 }
 
-void push(stack *sp, int data)
+void push(stack *sp, int data) // add a data in a stack
 {
     if(is_full(sp)==1)
         return;
     sp->arr[++(sp->top)] = data;
 }
 
-int pop(stack *sp)
+int pop(stack *sp) // remove the highest element of a stack
 {
     if(is_empty(sp)==1)
         return -1;
     return sp->arr[(sp->top)--];
 }
 
-int peek(stack *sp)
+int peek(stack *sp) // return the highest element of a stack
 {
     if(is_empty(sp)==1)
         return -1;
