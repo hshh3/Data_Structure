@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_SIZE 10000
+
+typedef struct {
+    int arr[MAX_SIZE];
+    int top;
+} stack;
+
+void stack_init(stack *sp)
+{
+    sp->top = -1;
+}
+
+int is_empty(stack *sp)
+{
+    if(sp->top == -1)
+        return 1;
+    return 0;
+}
+
+int size(stack *sp)
+{
+    return sp->top + 1;
+}
+
+int is_full(stack *sp)
+{
+    if(sp->top +1 >= MAX_SIZE)
+        return 1;
+    return 0;
+}
+
+void push(stack *sp, int data)
+{
+    if(is_full(sp)==1)
+        return;
+    sp->arr[++(sp->top)] = data;
+}
+
+int pop(stack *sp)
+{
+    if(is_empty(sp)==1)
+        return -1;
+    return sp->arr[(sp->top)--];
+}
+
+int peek(stack *sp)
+{
+    if(is_empty(sp)==1)
+        return -1;
+    return sp->arr[sp->top];
+}
+
+int main()
+{
+    int i;
+    char str[6];
+    stack st;
+    int n, num;
+    
+    scanf("%d", &n);
+    fgetc(stdin);
+    stack_init(&st);
+    
+    for(i=0 ; i<n ; i++) {
+        scanf("%s", str);
+        fgetc(stdin);
+        
+        if(!strcmp(str, "push")) {
+            scanf("%d", &num);
+            fgetc(stdin);
+            push(&st, num);
+        }
+        
+        else if(!strcmp(str, "pop")) {
+            printf("%d\n", pop(&st));
+        }
+        
+        else if(!strcmp(str, "empty")) {
+            printf("%d\n", is_empty(&st));
+        }
+        
+        else if(!strcmp(str, "size")) {
+            printf("%d\n", size(&st));
+        }
+        
+        else if(!strcmp(str, "top")) {
+            printf("%d\n", peek(&st));
+        }
+    }
+}
